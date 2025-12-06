@@ -15,7 +15,10 @@ const { PORT } = ENV;
 // middlewares
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(cors());
+app.use(cors({
+  origin: ENV.CLIENT_URL,
+  credentials: true
+}));
 app.use(clerkMiddleware());
 
 // routes
