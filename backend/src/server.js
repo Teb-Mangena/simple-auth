@@ -5,8 +5,8 @@ import cors from "cors";
 import { ENV } from "./config/env.js";
 import { connectDB } from "./config/db.js";
 import { clerkMiddleware } from '@clerk/express'
-import { serve } from "inngest/express";
-import { inngest,functions } from "./lib/inngest.js";
+// routes
+import clerkRoute from "./routes/clerk.route.js";
 
 // imports from routes
 const app = express();
@@ -21,12 +21,12 @@ app.use(cors({
 }));
 app.use(clerkMiddleware());
 
-// routes
-app.use("/api/inngest", serve({ client: inngest, functions }));
 
 app.get("/", (req,res) => {
   res.send("Ready to work");
 });
+
+app.use("/api", clerkRoute);
 
 // connect db and listen to ports
 connectDB().then(() => {
