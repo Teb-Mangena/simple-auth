@@ -1,3 +1,5 @@
+import User from "../models/user.model.js"
+
 export const clerkWebhook = async (req,res) => {
 
   try {
@@ -20,7 +22,7 @@ export const clerkWebhook = async (req,res) => {
 
     res.status(200).json({ success: true });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).json({ error: "Webhook handling failed" });
   }
 }
